@@ -1,38 +1,39 @@
 #include<iostream>
-#include<algorithm>
 #include<map>
-#include<vector>
 
 using namespace std;
 
-int findPair(vector<int> arr,int goal) {
-	//중복 확인을 위한 map 생성
-	map<pair<int, int>, bool> visited;
-	
-	int result = 0;
-	for (int i = 0; i < arr.size(); i++) {
-		for (int j = i+1; j < arr.size(); j++) {
-			if (arr[i] + arr[j] == goal && !visited.count({ arr[i],arr[j] })) {
-				cout<<arr[i]<<" "<<arr[j]<<"\n";
-				visited[{arr[i], arr[j]}]=true;
-				result++;
-			}
-		}
-	}
-	return result;
-}
-int main(void) {
-	vector<int> arr;
-	int num;
-	//숫자 입력
-	while (scanf("%d", &num) !=EOF) {
-		arr.push_back(num);
-	}
-	int goal = arr.back();
-	arr.pop_back();
+int findPair(map<int,int> mp, int goal) {
 
-	//오름차순 정렬
-	sort(arr.begin(), arr.end());
-	cout<<findPair(arr,goal);
+    int result = 0;//조건을 만족하는 (a,b)의 개수
+
+    //범위 기반 for문
+    for (auto i : mp) {
+        int temp = goal - i.first;
+        //temp가 구하려는 값의 반보다 작다면 break -> 절반보다 큰 경우에만 고려하여 중복 제거
+        if (temp < (goal + 1) / 2) {
+            break;
+        }
+        mp[i.first]--;
+        //temp크기의 숫자가 1개 이상 있다면 쌍 생성 가능
+        if (mp[temp] > 0) {
+            cout << i.first << " " << temp << "\n";
+            mp[temp]--;
+            result++;
+        }
+    }
+    return result;
+}
+
+int main(void) {
+    int num,goal;
+    map<int, int> mp;
+
+    //숫자를 입력 받는 동안 반복 -> arr에 삽입, 해당 숫자 개수 카운트
+    while (cin >> num) {
+        mp[num]++;
+    }
+    goal = num; //원하는 합
+    cout << findPair(mp, goal);
 
 }
