@@ -3,6 +3,7 @@
 
 using namespace std;
 
+
 int findPair(map<int,int> mp, int goal) {
 
     int result = 0;//조건을 만족하는 (a,b)의 개수
@@ -29,11 +30,13 @@ int main(void) {
     int num,goal;
     map<int, int> mp;
 
-    //숫자를 입력 받는 동안 반복 -> arr에 삽입, 해당 숫자 개수 카운트
+    //숫자를 입력 받는 동안 반복 -> 해당 숫자 개수 카운트
     while (cin >> num) {
         mp[num]++;
     }
-    goal = num; //원하는 합
+    //원하는 합
+    goal = num; 
+
     cout << findPair(mp, goal);
 
 }
