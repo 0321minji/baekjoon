@@ -1,54 +1,35 @@
 #include <iostream>
 #include <vector>
+#include <map>
 #include <algorithm>
-#include <set>
 
 using namespace std;
 
-bool cmp(pair<int, int>& a, pair<int, int>& b)
-{
-    if (a.first == b.first)
-    {
-        return a.second < b.second;
-    }
-    return a.first < b.first;
-}
+int main() {
+	int n, k, cnt=0;
+	vector<int> v;
+	map<int, int> m;
 
-int main()
-{
-    vector<int> v;
-    int n;
-    while (cin >> n)
-    {
-        v.push_back(n);
-    }
+	do {
+		cin >> n;
+		v.push_back(n);
+	} while (getc(stdin) == ' ');
+	cin >> k;
 
-    int sum = v.back();
-    v.pop_back();
+	//sort(v.begin(), v.end());	//a<=b�� ��� ����ϱ� ���
 
-    sort(v.begin(), v.end());
+	for (int i = 0; i < v.size(); i++) {
+		for (int j = i+1; j < v.size(); j++) {
+			if (v[i] + v[j] == k && !m.count(v[i])) {
+				m[v[i]] = v[j];
+				cnt += 1;
+			}
+		}
+	}
 
-    int ans = 0;
-    set<pair<int, int>> set;
+	for (auto iter = m.begin(); iter != m.end(); iter++) {
+		cout << (*iter).first << ' '<< (*iter).second<<"\n";
+	}
+	cout << cnt;
 
-    for (int i = 0; i < v.size(); i++)
-    {
-        for (int j = i + 1; j < v.size(); j++)
-        {
-            if (v[i] + v[j] == sum)
-            {
-                set.insert({ v[i], v[j] });
-                //ans++;
-            }
-        }
-    }
-
-    for (auto& p : set)
-    {
-        cout << p.first << " " << p.second << "\n";
-        ans++;
-    }
-
-    cout << ans << "\n";
-    return 0;
 }
