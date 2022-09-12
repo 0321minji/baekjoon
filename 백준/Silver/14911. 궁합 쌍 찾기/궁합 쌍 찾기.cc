@@ -1,42 +1,54 @@
-#include<iostream>
-#include<map>
+#include <iostream>
+#include <vector>
+#include <algorithm>
+#include <set>
 
 using namespace std;
 
-
-int findPair(map<int,int> mp, int goal) {
-
-    int result = 0;//조건을 만족하는 (a,b)의 개수
-
-    //범위 기반 for문
-    for (auto i : mp) {
-        int temp = goal - i.first;
-        //temp가 구하려는 값의 반보다 작다면 break -> 절반보다 큰 경우에만 고려하여 중복 제거
-        if (temp < (goal + 1) / 2) {
-            break;
-        }
-        mp[i.first]--;
-        //temp크기의 숫자가 1개 이상 있다면 쌍 생성 가능
-        if (mp[temp] > 0) {
-            cout << i.first << " " << temp << "\n";
-            mp[temp]--;
-            result++;
-        }
+bool cmp(pair<int, int>& a, pair<int, int>& b)
+{
+    if (a.first == b.first)
+    {
+        return a.second < b.second;
     }
-    return result;
+    return a.first < b.first;
 }
 
-int main(void) {
-    int num,goal;
-    map<int, int> mp;
-
-    //숫자를 입력 받는 동안 반복 -> 해당 숫자 개수 카운트
-    while (cin >> num) {
-        mp[num]++;
+int main()
+{
+    vector<int> v;
+    int n;
+    while (cin >> n)
+    {
+        v.push_back(n);
     }
-    //원하는 합
-    goal = num; 
 
-    cout << findPair(mp, goal);
+    int sum = v.back();
+    v.pop_back();
 
+    sort(v.begin(), v.end());
+
+    int ans = 0;
+    set<pair<int, int>> set;
+
+    for (int i = 0; i < v.size(); i++)
+    {
+        for (int j = i + 1; j < v.size(); j++)
+        {
+            if (v[i] + v[j] == sum)
+            {
+                set.insert({ v[i], v[j] });
+                //ans++;
+            }
+        }
+    }
+
+    for (auto& p : set)
+    {
+        cout << p.first << " " << p.second << "\n";
+        ans++;
+    }
+
+    cout << ans << "\n";
+    return 0;
 }
