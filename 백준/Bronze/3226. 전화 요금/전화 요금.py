@@ -1,28 +1,27 @@
+
 n=int(input())
 charge=0
 for i in range(n):
-    s=input()
-    s=s.replace(':',' ')
-    h,m,ti=map(int,s.split())
-    end_h,end_m=h,m
+    line=input()
+    h=int(line[:2])
+    m=int(line[3:5])
+    d=int(line[6:])
 
-    if ti+m>=60:
-        end_m=end_m+ti-60
+    end_h=h
+    end_m=(m+d)%60
+
+    if m+d>=60:
         end_h+=1
-        if end_h>23:
+        if end_h+1==24:
             end_h=0
-    else:
-        end_m+=ti
 
-    if(end_h==7 or end_h==19) and m>=end_m and end_m!=0:
-        if end_h==7:
-            charge+=(ti-end_m)*5 + end_m*10
-        elif end_h==19:
-            charge+=(ti-end_m)*10+end_m*5
+    if h==6 and end_h==7:
+        charge+=(d-end_m)*5 + end_m*10
+    elif h==18 and end_h==19:
+        charge+=(d-end_m)*10+end_m*5
     else:
-        if 7<=h<=18:
-            charge+=ti*10
+        if 6<h<19:
+            charge+=10*d
         else:
-            charge+=ti*5
-
+            charge+=5*d
 print(charge)
