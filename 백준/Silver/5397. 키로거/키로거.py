@@ -4,14 +4,13 @@ from collections import deque
 
 def solve(t):
     left=[]
-    right=deque([])
+    right=[]
     t=deque(t)
     index=0
     while t:
         temp=t.popleft()
         if temp=='<':
             if left:
-                #right.appendleft(left.pop())
                 right.append(left.pop())
         elif temp=='>':
             if right:
@@ -21,8 +20,7 @@ def solve(t):
                 left.pop()
         else:
             left.append(temp)
-        #print(left,right)
-    return left+list(right)[::-1]
+    return left+right[::-1]
     
     
 n=int(input())
