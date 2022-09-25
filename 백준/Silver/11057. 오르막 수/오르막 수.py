@@ -1,6 +1,6 @@
 n=int(input())
 mod=10007
-dp=[[1]*10 for _ in range(n)]
+dp=[[1]*(10) for _ in range(n)]
 
 for i in range(1,n):
     for j in range(1,10):
