@@ -1,18 +1,20 @@
 import sys
+input=sys.stdin.readline
 
-s=list(input())
+s=list(input().strip())
+que=0
+ans=0
 
-stack=[]
-answer=0
 for i in range(len(s)):
-    if s[i]=='(':
-        stack.append('(')
+    temp=s[i]
+    if temp=='(':
+        que+=1
     else:
-        if s[i-1]=='(':
-            stack.pop()
-            answer+=len(stack)
+        if i>0 and s[i-1]=='(':
+            que-=1
+            ans+=que
         else:
-            stack.pop()
-            answer+=1
-
-print(answer)
+            que-=1
+            ans+=1
+print(ans)
+        
