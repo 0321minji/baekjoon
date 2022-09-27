@@ -1,9 +1,9 @@
 n=list(input())
 n.sort(reverse=True)
 
-result=int("".join(n))
-
-if result%30==0:
-    print(result)
+n=int("".join(n))
+if n%30==0:
+    print(n)
 else:
     print(-1)
+
