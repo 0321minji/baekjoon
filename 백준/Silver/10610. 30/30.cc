@@ -41,14 +41,9 @@ string findNum(string n) {
 int main() {
     string n;
     cin >> n;
-
+    //N이 최대 10^5개의 숫자로 구성되어 있으므로 string타입 사용
     string ans = findNum(n);
 
-    //N이 최대 10^5개의 숫자로 구성되어 있으므로 string타입으로 하나씩 출력
-    /*for (int i = 0; i < ans.size(); i++) {
-        cout << ans[i];
-    }
-    cout << '\n';*/
     cout<<ans;
     return 0;
 
