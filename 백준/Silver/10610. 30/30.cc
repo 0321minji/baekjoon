@@ -13,13 +13,13 @@ using namespace std;
 */
 
 //모든 자릿수 합이 3의 배수인지 확인하는 함수
-bool checkThree(string num) {
+bool checkThree(string n) {
     int sum = 0;
-    for (int i = 0; i < num.size(); i++) {
-        sum += num[i];
+    for (int i = 0; i < n.size(); i++) {
+        sum += n[i];
     }
 
-    //더한 자릿수의 합이 3의 배수이면 num도 3의 배수
+    //더한 자릿수의 합이 3의 배수이면 n도 3의 배수
     if (sum % 3 == 0) {
         return true;
     }
