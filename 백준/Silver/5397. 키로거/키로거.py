@@ -1,26 +1,29 @@
 import sys
-input=sys.stdin.readline
 from collections import deque
-def solve(s):
-    left=[]
-    right=[]
-    s=deque(s)
-    while s:
-        temp=s.popleft()
-        if temp=='-':
-            if left:
-                left.pop()
-        elif temp=='<':
-            if left:
-                right.append(left.pop())
-        elif temp=='>':
-            if right:
-                left.append(right.pop())
-        else:
-            left.append(temp)
-    return left+right[::-1]
+input=sys.stdin.readline
 
 t=int(input())
-for i in range(t):
-    s=list(input().strip())
-    print(*solve(s),sep='')
+
+for _ in range(t):
+    sentence=list(input().strip())
+
+    left=[]
+    right=deque([])
+    for i in range(len(sentence)):
+        if sentence[i]==">":
+            if right:
+                temp=right.popleft()
+                left.append(temp)
+        elif sentence[i]=="<":
+            if left:
+                temp=left.pop()
+                right.appendleft(temp)
+        elif sentence[i]=="-":
+            if left:
+                left.pop()
+        else:
+            left.append(sentence[i])
+    result=left+list(right)
+    for i in range(len(result)):
+        print(result[i],end='')
+    print()
