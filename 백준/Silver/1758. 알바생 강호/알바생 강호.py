@@ -1,17 +1,17 @@
-#1758
 import sys
 input=sys.stdin.readline
 
+def solve(n,num):
+    num.sort(reverse=True)
+    result=0
+    for i in range(n):
+        if num[i]-i<=0:
+            return result
+        result+=num[i]-i
+    return result
+
 n=int(input())
-tip=[]
+num=[]
 for i in range(n):
-    tip.append(int(input()))
-
-total=0
-tip.sort(reverse=True)
-for i in range(n):
-    temp=tip[i]-i
-    if temp>=0:
-        total+=temp
-
-print(total)
+    num.append(int(input()))
+print(solve(n,num))
