@@ -1,22 +1,23 @@
-from sys import stdin
+import sys
 from collections import Counter
+input=sys.stdin.readline
 
-stack=[]
-n = int(stdin.readline())
-s = list(stdin.readline().split())
-cnt = Counter(s)
-s = [[cnt[num], int(num)] for num in s]
-answer = [-1 for _ in range(n)]
-stack.append(0)
+n=int(input())
+num=list(map(int,input().split()))
 
-i = 1
-while stack and i < n:
-    while stack and s[stack[-1]][0] < s[i][0]:
-        answer[stack[-1]] = s[i][1]
-        stack.pop()
+cnt=Counter(num)
+#등장횟수'
+f=[cnt[i] for i in num]
+m=max(f)
+result=[-1]*n
 
-    stack.append(i)
-    i += 1
+st=[0]
+i=1
+while st and i<n:
+    while st and f[st[-1]]<f[i]:
+        result[st[-1]]=num[i]
+        st.pop()
+    st.append(i)
+    i+=1
 
-for num in answer:
-    print(num, end=' ')
+print(*result)
