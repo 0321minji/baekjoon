@@ -1,19 +1,24 @@
-import sys, heapq
-input = sys.stdin.readline
+import heapq
+import sys
+input=sys.stdin.readline
 
-n, h, t = map(int, input().split())
-giants = [-int(input()) for _ in range(n)]
-heapq.heapify(giants)
-cnt = 0
+n,h,t=map(int,input().split())
+other=[]
 
+for _ in range(n):
+    k=int(input())
+    heapq.heappush(other,-k)
+    
 for i in range(t):
-    if -giants[0] == 1 or -giants[0] < h:
+    if -other[0]==1 or -other[0]<h:
+        i-=1
         break
     else:
-        heapq.heapreplace(giants, -(-giants[0] // 2))
-        cnt += 1
-
-if -giants[0] >= h:
-    print('NO', -giants[0], sep='\n')
+        heapq.heapreplace(other,-(-other[0]//2))
+        
+if -other[0]>=h:
+    print('NO')
+    print(-other[0])
 else:
-    print('YES', cnt, sep='\n')
+    print('YES')
+    print(i+1)
