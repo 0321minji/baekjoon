@@ -1,5 +1,4 @@
-import heapq
-import sys
+import sys, heapq
 input=sys.stdin.readline
 
 n=int(input())
@@ -11,5 +10,6 @@ for _ in range(n):
             print(0)
         else:
             print(heapq.heappop(num))
+
     else:
         heapq.heappush(num,x)
