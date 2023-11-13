@@ -1,22 +1,24 @@
 import sys
-sys.setrecursionlimit(10**6)
 input=sys.stdin.readline
-def dfs(link,start,parents):
-    for i in link[start]:
-        if(parents[i]==0):
-            parents[i]=start
-            dfs(link,i,parents)
+sys.setrecursionlimit(10**6)
+
+def solve(tree,s,p):
+    for i in tree[s]:
+        if p[i]==0:
+            p[i]=s
+            solve(tree,i,p)
+
+
 n=int(input())
-link=[[] for _ in range(n+1)]
+tree=[[] for _ in range(n+1)]
 
 for i in range(n-1):
     a,b=map(int,input().split())
-    link[a].append(b)
-    link[b].append(a)
+    tree[a].append(b)
+    tree[b].append(a)
 
-parents=[0]*(n+1)
-dfs(link,1,parents)
+p=[0]*(n+1)
+solve(tree,1,p)
 
 for i in range(2,n+1):
-    print(parents[i])
-
+    print(p[i])
