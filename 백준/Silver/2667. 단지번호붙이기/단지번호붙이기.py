@@ -1,38 +1,36 @@
-from collections import deque
+import sys
+input=sys.stdin.readline
 
-move=[[0,1],[0,-1],[1,0],[-1,0]]
+move=[[0,1],[0,-1],[-1,0],[1,0]]
 
-def bfs(x,y):
-    n=len(graph)
-    que=deque([])
-    que.append((x,y)) #탐색 시작점
-    graph[x][y]=0
-    count=1
-
-    while(que):
-        a,b=que.popleft()
-        for i in move:
-            nx=a+i[0]
-            ny=b+i[1]
-            if nx<0 or nx>=n or ny<0 or ny>=n: #범위 벗어나면
-                continue
-            if graph[nx][ny]==1: #다음 인접한 위치가 1이면
-                graph[nx][ny]=0
-                que.append((nx,ny))
-                count+=1
-    return count
+def solve(a,b,v):
+    st=[[a,b]]
+    temp=0
+    MAP[a][b]=-1
+    
+    while(st):
+        a,b=st.pop()
+        temp+=1
+        for dx,dy in move:
+            nx=a+dx; ny=b+dy
+            if 0<=nx<n and 0<=ny<n and MAP[nx][ny]==v:
+                st.append([nx,ny])
+                MAP[nx][ny]=-1
+    return temp
 
 n=int(input())
-graph=[]
-for i in range(n):
-    graph.append(list(map(int,input())))
+MAP=[]
 
-result=[]
+for _ in range(n):
+    MAP.append(list(map(int,input().rstrip())))
+
+result=0
+cnt=[]
 for i in range(n):
     for j in range(n):
-        if graph[i][j]==1:
-            result.append(bfs(i,j))
-result.sort()
-print(len(result))
-for i in result:
-    print(i)
+        if MAP[i][j]>0:
+            cnt.append(solve(i,j,MAP[i][j]))
+            result+=1
+print(result)
+cnt.sort()
+print(*cnt,sep='\n',end='')
