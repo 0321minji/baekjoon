@@ -1,35 +1,31 @@
-#1012
-#상하좌우가 인접
 import sys
 input=sys.stdin.readline
-dx=[0,0,-1,1]
-dy=[-1,1,0,0]
 
-def bfs(x,y):
-    queue=[[x,y]]
-    while queue:
-        a,b=queue[0][0],queue[0][1]
-        del queue[0]
-        for i in range(4):
-            q=a+dx[i]
-            w=b+dy[i]
-            if 0<=q<n and 0<=w<m and Map[q][w]==1:
-                Map[q][w]=0
-                queue.append([q,w])
-    
+move=[[0,1],[0,-1],[1,0],[-1,0]]
+
+def check(a,b):
+    st=[[a,b]]
+    while st:
+        x,y=st.pop()
+        for a,b in move:
+            nx=x+a; ny=y+b
+            if 0<=nx<m and 0<=ny<n and ground[nx][ny]:
+                st.append([nx,ny])
+                ground[nx][ny]=0
+
 
 t=int(input())
-for i in range(t):
-    count=0
+for _ in range(t):
+    snail=0
     m,n,k=map(int,input().split())
-    Map=[[0]*m for i in range(n)]   
-    for i in range(k):
-        y,x=map(int,input().split())
-        Map[x][y]=1
-    for a in range(n):
-        for b in range(m):
-            if Map[a][b]==1:
-                bfs(a,b)
-                Map[a][b]=0
-                count+=1
-    print(count)
+    ground=[[0]*(n) for _ in range(m)]
+    for _ in range(k):
+        x,y=map(int,input().split())
+        ground[x][y]=1
+
+    for i in range(m):
+        for j in range(n):
+            if ground[i][j]:
+                check(i,j)
+                snail+=1
+    print(snail)
