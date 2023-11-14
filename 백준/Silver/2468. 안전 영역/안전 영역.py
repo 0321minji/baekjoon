@@ -14,7 +14,6 @@ def solve(a,b,v,visit):
                     st.append([nx,ny])
                     visit[nx][ny]=1
     
-
 n=int(input())
 MAP=[]
 result=0
