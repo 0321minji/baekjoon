@@ -1,36 +1,34 @@
 import sys
 input=sys.stdin.readline
 
-move=[[0,1],[0,-1],[-1,0],[1,0]]
+move=[[0,1],[0,-1],[1,0],[-1,0]]
 
-def solve(a,b,v):
+def solve(a,b,k):
     st=[[a,b]]
-    temp=0
-    MAP[a][b]=-1
-    
-    while(st):
-        a,b=st.pop()
-        temp+=1
-        for dx,dy in move:
-            nx=a+dx; ny=b+dy
-            if 0<=nx<n and 0<=ny<n and MAP[nx][ny]==v:
+    count=0
+    while st:
+        x,y=st.pop()
+        for a,b in move:
+            nx=x+a; ny=y+b;
+            if 0<=nx<n and 0<=ny<n and apart[nx][ny]==k:
                 st.append([nx,ny])
-                MAP[nx][ny]=-1
-    return temp
-
+                apart[nx][ny]=0
+                count+=1
+                
+    return count
+    
 n=int(input())
-MAP=[]
 
-for _ in range(n):
-    MAP.append(list(map(int,input().rstrip())))
+apart=[list(map(int,list(input().rstrip()))) for _ in range(n)]
 
-result=0
-cnt=[]
+result=[]
 for i in range(n):
     for j in range(n):
-        if MAP[i][j]>0:
-            cnt.append(solve(i,j,MAP[i][j]))
-            result+=1
-print(result)
-cnt.sort()
-print(*cnt,sep='\n',end='')
+        if apart[i][j]:
+            temp=solve(i,j,apart[i][j])
+            if not temp:
+                result.append(1)
+            else:
+                result.append(temp)
+result.sort()
+print(len(result),*result,sep='\n')
