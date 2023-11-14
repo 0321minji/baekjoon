@@ -20,5 +20,4 @@ for i in range(n-1):
 p=[0]*(n+1)
 solve(tree,1,p)
 
-for i in range(2,n+1):
-    print(p[i])
+print(*p[2:],sep='\n')
