@@ -1,20 +1,18 @@
-import sys
+import sys, heapq
 input=sys.stdin.readline
-import heapq
 
 t=int(input())
-INF=10**8
+inf=10**8
+
 for _ in range(t):
     n,d,c=map(int,input().split())
     com=[[] for _ in range(n+1)]
-    visit=[INF]*(n+1)
-    #com 인접리스트
+    visit=[inf]*(n+1)
     for _ in range(d):
         a,b,s=map(int,input().split())
         com[b].append([a,s])
 
     pq=[]
-    #탐색
     heapq.heappush(pq,[0,c])
     cnt=0
     time=0
@@ -25,7 +23,7 @@ for _ in range(t):
         visit[cn]=t
         cnt+=1
         time=t
-        for nc,nt in com[cn]:
+        for nc, nt in com[cn]:
             if visit[nc]>nt+t:
                 heapq.heappush(pq,[nt+t,nc])
     print(cnt,time)
