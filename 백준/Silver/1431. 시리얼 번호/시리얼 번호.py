@@ -1,18 +1,18 @@
 import sys
-import re
 input=sys.stdin.readline
 
-def solve(n):
-    serial=[]
-    for _ in range(n):
-        temp=input()
-        nums=re.sub(r'[^0-9]','',temp)
-        num=sum(list(map(int,nums)))
-        serial.append([temp,len(temp),num])
-    serial.sort(key=lambda x:(x[1],x[2],x[0]))
-
-    for i in serial:
-        print(i[0].rstrip())
-      
 n=int(input())
-solve(n)
+sn=[]
+#1: 길이 짧은순, 2: 자리수합(숫자만), 3:사전순(숫자<알파벳)
+
+for _ in range(n):
+    temp=input().rstrip()
+    num=0
+    for i in range(len(temp)):
+        if temp[i]<='9':
+            num+=int(temp[i])
+    sn.append([len(temp),num,temp])
+
+sn.sort()
+for i in range(n):
+    print(sn[i][2])
