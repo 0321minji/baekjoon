@@ -4,7 +4,7 @@
 
 ### 성능 요약
 
-메모리: 20928 KB, 시간: 396 ms
+메모리: 199472 KB, 시간: 2004 ms
 
 ### 분류
 
@@ -12,7 +12,7 @@
 
 ### 제출 일자
 
-2022년 11월 26일 13:59:40
+2023년 12월 6일 21:46:37
 
 ### 문제 설명
 
@@ -24,11 +24,11 @@
 
 <p>모든 건물이 도로를 통해 연결되도록 최소한의 도로를 만들려고 한다.</p>
 
-<p style="text-align: center;"><img alt="" src="" style="height: 455px; width: 650px;"></p>
+<p style="text-align: center;"><img alt="" src="https://upload.acmicpc.net/007ab470-3481-47d6-85ec-f5378b3051b3/-/crop/1122x785/404,145/-/preview/" style="height: 455px; width: 650px;"></p>
 
 <p>위 그림에서 건물과 직선으로 표시된 도로, 해당 도로를 만들 때 드는 비용을 표시해놓은 지도이다.</p>
 
-<p style="text-align: center;"><img alt="" src="" style="height: 442px; width: 650px;"></p>
+<p style="text-align: center;"><img alt="" src="https://upload.acmicpc.net/c16fc3ee-aaa3-4950-bfa3-57661b00389e/-/crop/1068x727/430,178/-/preview/" style="height: 442px; width: 650px;"></p>
 
 <p>그림에 있는 도로를 다 설치할 때 드는 비용은 62이다. 모든 건물을 연결하는 도로만 만드는 비용은 27로 절약하는 비용은 35이다.</p>
 
