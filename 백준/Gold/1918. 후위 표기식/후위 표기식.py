@@ -4,19 +4,23 @@ input=sys.stdin.readline
 
 def solve():
     st=[]
-    for i in range(len(f)):
-        if 'A'<=f[i]<='Z':
-            print(f[i],end='')
-        elif f[i]=='(':
+    for i in fx:
+        if i.isalpha():
+            print(i,end='')
+            
+        elif i=='(':
             st.append('(')
-        elif f[i]=='*' or f[i]=='/':
+            
+        elif i=='*' or i=='/':
             while st and (st[-1]=='*' or st[-1]=='/'):
-                    print(st.pop(),end='')
-            st.append(f[i])
-        elif f[i]=='+' or f[i] =='-':
+                print(st.pop(),end='')
+            st.append(i)
+            
+        elif i=='+' or i=='-':
             while st and st[-1]!='(':
-                    print(st.pop(),end='')
-            st.append(f[i])
+                print(st.pop(),end='')
+            st.append(i)
+            
         else:
             while st and st[-1]!='(':
                 print(st.pop(),end='')
@@ -24,5 +28,5 @@ def solve():
     while st:
         print(st.pop(),end='')
 
-f=list(input().rstrip())
+fx=list(input().rstrip())
 solve()
