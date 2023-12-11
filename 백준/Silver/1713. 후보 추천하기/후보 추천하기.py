@@ -4,7 +4,6 @@ input=sys.stdin.readline
 def solve():
     #0-추천수 1-시간
     photo=[[10**3,10**3] for _ in range(101)]
-    photo[0]=[10**8,10**8]
     stu=[]
     for i in range(t):
         if g[i] in stu:
