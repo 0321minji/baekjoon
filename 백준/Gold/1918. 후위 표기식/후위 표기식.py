@@ -1,32 +1,28 @@
 import sys
+from collections import Counter
 input=sys.stdin.readline
 
-inp=list(input().rstrip())
-st=[]
-result=''
+def solve():
+    st=[]
+    for i in range(len(f)):
+        if 'A'<=f[i]<='Z':
+            print(f[i],end='')
+        elif f[i]=='(':
+            st.append('(')
+        elif f[i]=='*' or f[i]=='/':
+            while st and (st[-1]=='*' or st[-1]=='/'):
+                    print(st.pop(),end='')
+            st.append(f[i])
+        elif f[i]=='+' or f[i] =='-':
+            while st and st[-1]!='(':
+                    print(st.pop(),end='')
+            st.append(f[i])
+        else:
+            while st and st[-1]!='(':
+                print(st.pop(),end='')
+            st.pop()
+    while st:
+        print(st.pop(),end='')
 
-for temp in inp:
-    if temp.isalpha():
-        result+=temp
-
-    elif temp=='(':
-        st.append(temp)
-
-    elif temp =='*' or temp=='/':
-        while st and (st[-1]=='*' or st[-1]=='/'):
-            result+=st.pop()
-        st.append(temp)
-
-    elif temp=='+' or temp== '-':
-        while st and st[-1]!='(':
-            result+=st.pop()
-        st.append(temp)
-
-    elif temp==')':
-        while st and st[-1]!='(':
-            result+=st.pop()
-        st.pop()
-
-while st:
-    result+=st.pop()
-print(result)
+f=list(input().rstrip())
+solve()
