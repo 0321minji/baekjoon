@@ -1,36 +1,36 @@
 import sys
 input=sys.stdin.readline
 
-def notchange():
-    temp=i-(a+i0)
-    after=w0+temp*d
+def nochange():
+    after=w0+(i-(i0+a))*d
     if after<=0:
         print('Danger Diet')
         return
-    print(after,i0)
-    return
-
+    else:
+        print(after,i0)
+    
+        
 def change():
-    base=i0
     weight=w0
+    base=i0
     for _ in range(d):
-        temp=i-(a+base)
-        weight+=temp
+        use=base+a
+        weight+=(i-use)
         if weight<=0:
             print('Danger Diet')
             return
-        if abs(temp)>t:
-            base+=(temp//2)
+        if abs(i-use)>t:
+            base+=(i-use)//2
         if base<=0:
             print('Danger Diet')
             return
-    result='NO'
+    state='NO'
     if i0-base>0:
-        result='YOYO'
-    print(weight,base,result)
-        
+        state='YOYO'
+    print(weight,base,state)
 
 w0,i0,t=map(int,input().split())
 d,i,a=map(int,input().split())
-notchange()
+
+nochange()
 change()
