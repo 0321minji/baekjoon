@@ -3,31 +3,28 @@ input=sys.stdin.readline
 
 def solve(h,m,d):
     global result
-    if 7<=h<=17:
-        result+=d*10
-    elif 0<=h<=5 or 19<=h<24:
-        
-        result+=d*5
-    else:
-        if (m+d)//60:
-            t=(m+d)%60
-            if h==18:
-                result+=t*5
-                result+=(d-t)*10
-            else:
-                result+=t*10
-                result+=(d-t)*5
-        else:
-            if h==18:
-                result+=d*10
-            elif h==6:
+    if h==6 or h==18:
+        if 60-m>d:
+            if h==6:
                 result+=d*5
-            
-        
-
-n=int(input())
+            else:
+                result+=d*10
+        else:
+            if h==6:
+                result+=(60-m)*5
+                result+=((m+d)%60)*10
+            else:
+                result+=(60-m)*10
+                result+=((m+d)%60)*5
+    elif 7<=h<=17:
+        result+=d*10
+    else:
+        result+=d*5
+    return
 result=0
+n=int(input())
 for _ in range(n):
-    temp=list(map(str,input().split()))
-    solve(int(str(temp[0][:2])),int(str(temp[0][3:])),int(temp[1]))
+    call=list(map(str,input().split()))
+    solve(int(str(call[0][:2])),int(str(call[0][3:])),int(call[1]))
+    
 print(result)
