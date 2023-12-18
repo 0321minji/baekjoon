@@ -1,5 +1,3 @@
-#kruskal
-
 import sys
 input=sys.stdin.readline
 
@@ -16,15 +14,15 @@ def union(x,y):
         parent[b]=a
     else:
         parent[a]=b
-        
 
-def kruskal(v,total,pq):
+def solve(result):
     cnt=0
 
     for w,a,b in pq:
         if find(a)!=find(b):
             union(a,b)
-            total-=w
+            result-=w
+
     for i in range(1,n):
         if i==parent[i]:
             cnt+=1
@@ -32,16 +30,16 @@ def kruskal(v,total,pq):
     if cnt>1:
         return -1
     else:
-        return total
+        return result
 
 n,m=map(int,input().split())
-parent=[ i for i in range(n+1)]
+parent=[i for i in range(n+1)]
 pq=[]
-total=0
+result=0
 
 for _ in range(m):
     a,b,c=map(int,input().split())
     pq.append((c,a,b))
-    total+=c
+    result+=c
 pq.sort()
-print(kruskal(n,total,pq))
+print(solve(result))
