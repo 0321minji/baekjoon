@@ -1,17 +1,21 @@
-def dfs(num):
+import sys
+input=sys.stdin.readline
+
+def bt(num):
     global cnt
-    if len(n) == 1:
-        cnt +=1
+    if len(n)==1:
+        cnt+=1
         return
-    L = set(list(num))
-    if len(L) == 1:
+    L=set(list(num))
+    if len(L)==1:
         cnt+=1
         return
     else:
-        dfs(num[1:])
-        dfs(num[:-1])
-
-n = input()
-cnt = 0
-dfs(n)
+        bt(num[1:])
+        bt(num[:-1])
+        
+    
+n=input().rstrip()
+cnt=0
+bt(n)
 print(cnt)
