@@ -1,15 +1,18 @@
 import sys
 input=sys.stdin.readline
 
-r,b=map(int,input().split())
-
-t=r+b
-
-for i in range(3,t//2):
-    if t%i!=0:
-        continue
-    temp=t//i
-    if (i-2)*(temp-2)==b:
-        print(temp,i)
-        break
+def solve(s):
+    i=r
+    while True:
+        temp=s//i
+        if temp>i:
+            break
+        
+        if (i-2)*(temp-2)==b:
+            print(i,temp)
+            return
+        i-=1
     
+
+r,b=map(int,input().split())
+solve(r+b)
