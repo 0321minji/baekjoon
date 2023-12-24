@@ -1,29 +1,24 @@
 import sys
 input=sys.stdin.readline
 
-n=int(input())
-word=[]
-for i in range(n):
-    word.append(input().rstrip())
-result=[word[0]]
-word.remove(word[0])
-
-i=0
-while True:
-    if i>=len(word):
-        break
-    same=False
-    for k in result:
-        l=len(k)
-        if len(word[i])==l and set(word[i])==set(k):
-            for j in range(l):
-                if k[j:]+k[:j]==word[i]:
-                    same=True
+def solve():
+    word=[]
+    for w in words:
+        if not word:
+            word.append(w)
+        else:
+            flag=False
+            for i in range(len(w)):
+                temp=w[i:]+w[:i]
+                if temp in word:
+                    flag=True
                     break
-    if not same:
-        result.append(word[i])
-        word.remove(word[i])
-        i-=1
-    i+=1
+            if not flag:                
+                word.append(w)
 
-print(len(result))
+    return len(word)
+
+
+n=int(input())
+words=[input().rstrip() for _ in range(n)]
+print(solve())
