@@ -2,16 +2,13 @@ import sys
 input=sys.stdin.readline
 
 n=int(input())
-result=dict()
-
+result={}
 for _ in range(n):
-    a,b=map(str,input().split())
-
-    if b=='enter':
-        result[a]=b
+    name,state=map(str,input().split())
+    if name in result:
+        result.pop(name)
     else:
-        del result[a]
-
-result=sorted(result.keys(), reverse=True)
-
-print(*result,sep='\n')
+        result[name]=1
+result=list(result.keys())
+result.sort(reverse=True)
+print(*result, sep='\n')
