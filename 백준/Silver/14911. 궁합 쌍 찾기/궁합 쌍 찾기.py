@@ -1,22 +1,23 @@
 import sys
 input=sys.stdin.readline
 
-innum=list(map(int,input().split()))
+num=list(map(int,input().split()))
 goal=int(input())
 
 result=[]
-innum.sort()
+num.sort()
 
-for i in range(len(innum)-1):
-    for j in range(i+1,len(innum)):
-        if innum[i]+innum[j]==goal:
-            if innum[i]>=innum[j]:
-                result.append((innum[j],innum[i]))
+for i in range(len(num)-1):
+    for j in range(i+1,len(num)):
+        if num[i]+num[j]==goal:
+            if num[i]>=num[j]:
+                result.append((num[j],num[i]))
             else:
-                result.append((innum[i],innum[j]))
+                result.append((num[i],num[j]))
 result.sort()
+
 result=list(dict.fromkeys(result))
 
-for temp in result:
-    print(*temp)
+for i in result:
+    print(*i)
 print(len(result))
