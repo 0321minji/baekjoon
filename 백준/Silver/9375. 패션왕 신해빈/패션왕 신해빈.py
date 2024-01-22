@@ -16,6 +16,4 @@ for _ in range(t):
     result=1
     for i in wear:
         result*=(len(wear[i])+1)
-        #종류수+1 곱해줌
     print(result-1)
-        
