@@ -2,11 +2,11 @@ import sys
 input=sys.stdin.readline
 
 n,c=map(int,input().split())
-m=list(map(int,input().split()))
+num=list(map(int,input().split()))
 count={}
 index=1
 
-for t in m:
+for t in num:
     if t in count:
         count[t][0]+=1
     else:
@@ -15,9 +15,8 @@ for t in m:
 
 result=[[a,b] for a,b in count.items()]
 result.sort(key=lambda x:(-x[1][0],x[1][1]))
-res=[]
 
+res=[]
 for i,j in result:
     res+=[i]*j[0]
-    
 print(*res)
