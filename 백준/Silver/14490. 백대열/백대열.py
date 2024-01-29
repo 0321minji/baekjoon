@@ -1,15 +1,13 @@
 import sys
 input=sys.stdin.readline
 
-n,m=map(int,input().split(':')) #: 사이에 있는거 빼먹지 말기
+def solve(a,b):
+    r=b%a
+    if not r:
+        return a
+    return solve(r,a)
+    
 
-def gcd(a,b): #유클리드 호제법 사용
-    while b>0:
-        temp=a
-        a=b
-        b=temp%b
-    return a
-
-a=gcd(n,m)
-
-print(str(n//a)+":"+str(m//a))
+n,m=map(int,input().split(':'))
+result=solve(max(n,m),min(n,m))
+print(str(n//result)+':'+str(m//result))
