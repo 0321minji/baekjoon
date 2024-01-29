@@ -1,5 +1,6 @@
 import sys, math
 input=sys.stdin.readline
+
 def prime():
     for i in range(2,int(math.sqrt(10**6))+1):
         if number[i]:
