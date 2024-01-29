@@ -1,13 +1,13 @@
 import sys
 input=sys.stdin.readline
 
-def solve(a,b):
+def gcd(a,b):
     r=b%a
     if not r:
         return a
-    return solve(r,a)
     
+    return gcd(r,a)
 
 n,m=map(int,input().split(':'))
-result=solve(max(n,m),min(n,m))
-print(str(n//result)+':'+str(m//result))
+temp=gcd(n,m)
+print(f"{n//temp}:{m//temp}")
