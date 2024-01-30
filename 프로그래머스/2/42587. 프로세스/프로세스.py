@@ -15,6 +15,7 @@ def solution(priorities, location):
                 return cnt
             cnt+=1
         else:
-            pr.append((temp))
-
+            pr.append(temp)
+        
+        
     return answer
