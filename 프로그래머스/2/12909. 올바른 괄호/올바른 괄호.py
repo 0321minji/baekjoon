@@ -1,17 +1,16 @@
 def solution(s):
     answer = True
-    left=[]
-    if s[0]==')' or s[-1] == '(':
+    if s[0]==')' or s[-1]=='(':
         return False
-    for i in s:
-        if i =='(':
-            left.append(i)
-        if i==')':
+    left=['(']
+    for i in range(1,len(s)):
+        if s[i]=='(':
+            left.append(s[i])
+        else:
             if left:
                 left.pop()
             else:
                 return False
     if left:
         return False
-
     return True
