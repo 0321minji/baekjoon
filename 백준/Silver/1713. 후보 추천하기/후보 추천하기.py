@@ -1,29 +1,32 @@
 import sys
 input=sys.stdin.readline
 
-def solve():
-    #0-추천수 1-시간
-    photo=[[10**3,10**3] for _ in range(101)]
-    stu=[]
-    for i in range(t):
-        if g[i] in stu:
-            photo[g[i]][0]+=1
-        elif len(stu)<n:
-            photo[g[i]]=[1,i]
-            stu.append(g[i])
-        else:
-            #추천 젤 작은거&젤 오래된거 삭제 
-            index=photo.index(min(photo,key=lambda x:(x[0],x[1])))
-            #print(index,photo)
-            photo[index]=[10**3,10**3]
-            stu.remove(index)
-            photo[g[i]]=[1,i]
-            stu.append(g[i])
-    stu.sort()
-    print(*stu)
-            
-            
+def check(i):
+    for j in temp:
+        if j[2]==i:
+            j[0]+=1
+            return True
+    return False
 n=int(input())
-t=int(input())
-g=list(map(int,input().split()))
-solve()
+total=int(input())
+who=list(map(int,input().split()))
+temp=[]
+
+for i in range(total):
+    state=check(who[i])
+    #print(state)
+    #이미 게시되었는지 확인
+    if state:
+        continue
+    #사진틀이 비어있는 경우 -> 바로 추가 (추천수,게시시간,후보번호)
+    if len(temp)<n:
+        temp.append([1,i,who[i]])
+    #삭제해야하는 경우 -> 정렬(추천수, 게시시간 기준으로 정렬됨 -> 0번째 pop)
+    else:
+        temp.sort()
+        temp.pop(0)
+        temp.append([1,i,who[i]])
+    #print(temp)
+result=[i[2] for i in temp]
+result.sort()
+print(*result)
