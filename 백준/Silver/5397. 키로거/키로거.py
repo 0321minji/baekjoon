@@ -2,11 +2,7 @@ import sys
 from collections import deque
 input=sys.stdin.readline
 
-t=int(input())
-
-for _ in range(t):
-    sentence=list(input().strip())
-
+def check(sentence):
     left=[]
     right=deque([])
     for i in range(len(sentence)):
@@ -24,6 +20,12 @@ for _ in range(t):
         else:
             left.append(sentence[i])
     result=left+list(right)
-    for i in range(len(result)):
-        print(result[i],end='')
-    print()
+    print(''.join(result))
+        
+t=int(input())
+
+for _ in range(t):
+    sentence=list(input().strip())
+    check(sentence)
+
+    #print()
