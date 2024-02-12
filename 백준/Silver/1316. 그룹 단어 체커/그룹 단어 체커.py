@@ -1,23 +1,18 @@
 import sys
 input=sys.stdin.readline
 
-def solve(string):
+def solve(word):
     global result
-    alp=[]
-    for i in string:
-        if not i in alp:
-            alp.append(i)
-        else:
-            if alp[-1]!=i:
-                return
+    s=set(word[0])
+    for i in range(1,len(word)):
+        if word[i] in s and word[i-1]!=word[i]:
+            return
+        s.add(word[i])
     result+=1
-        
-
-
+    
 n=int(input())
+words=[input().rstrip() for _ in range(n)]
 result=0
-for _ in range(n):
-    string=list(input().rstrip())
-    solve(string)
-
+for w in words:
+    solve(w)
 print(result)
