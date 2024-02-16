@@ -1,0 +1,8 @@
+-- 코드를 작성해주세요
+# RARITY 가 RARE인 항목들을 우선 구하고, 그 '항목들이 PARENT' 인 ITEM이 있으면 업글가능
+SELECT T.ITEM_ID, ITEM_NAME, RARITY
+FROM ITEM_TREE T JOIN ITEM_INFO I ON T.ITEM_ID=I.ITEM_ID
+WHERE PARENT_ITEM_ID IN (SELECT ITEM_ID
+                         FROM ITEM_INFO
+                         WHERE RARITY='RARE')
+ORDER BY T.ITEM_ID DESC
