@@ -1,5 +1,5 @@
 -- 코드를 INT작성해주세요
-select count(*) FISH_COUNT,  convert(date_format(time,"%c"),UNSIGNED) as month
+select count(*) FISH_COUNT,  month(time) as MONTH
 from fish_info
-group by convert(date_format(time,"%c"),UNSIGNED)
-order by month 
+group by month
+order by month
