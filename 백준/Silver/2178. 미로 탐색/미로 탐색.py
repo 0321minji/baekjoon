@@ -1,26 +1,31 @@
 import sys
-input=sys.stdin.readline
-
-def bfs():
-    q=[(0,0,1)]
-    while q:
-        x,y,res=q.pop(0)
-        for (dx,dy) in move:
-            nx=x+dx
-            ny=y+dy
-            if nx==n-1 and ny==m-1:
-                print(res+1)
-                return
-            if 0<=nx<n and 0<=ny<m:
-                if graph[nx][ny]=='1':
-                    q.append((nx,ny,res+1))
-                    graph[nx][ny]=2
+from collections import deque
+input = sys.stdin.readline
 
 n,m=map(int,input().split())
+#붙어서 입출력
 graph=[]
-move=[[0,1],[0,-1],[1,0],[-1,0]]
+
 for _ in range(n):
     graph.append(list(input().rstrip()))
+#print(graph)
 
-graph[0][0]=2
-bfs()
+move=[[0,1],[0,-1],[1,0],[-1,0]]
+
+def solve():
+    que=deque([(0,0,1)])
+    graph[0][0]=2
+    
+    while que:
+        x,y,cnt=que.popleft()
+
+        if x==n-1 and y==m-1:
+            print(cnt)
+            return
+        for a,b in move:
+            nx=x+a; ny=y+b
+            if 0<=nx<n and 0<=ny<m and graph[nx][ny]=='1':
+                que.append([nx,ny,cnt+1])
+                graph[nx][ny]=2
+
+solve()
