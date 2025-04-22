@@ -1,19 +1,21 @@
 import sys
 input=sys.stdin.readline
+from collections import defaultdict
+
+
+def calc():
+    res=1
+    key = c.keys()
+    for k in key:
+        res=res*(len(c[k])+1)
+    print(res-1)
+
 
 t=int(input())
 for _ in range(t):
     n=int(input())
-    wear={}
-
+    c=defaultdict(list)
     for _ in range(n):
-        temp=list(input().split())
-        t=temp[1]
-        if t in wear:
-            wear[t].append(temp[0])
-        else:
-            wear[t]=[temp[0]]
-    result=1
-    for i in wear:
-        result*=(len(wear[i])+1)
-    print(result-1)
+        a,b=map(str,input().split())
+        c[b].append(a)
+    calc()
