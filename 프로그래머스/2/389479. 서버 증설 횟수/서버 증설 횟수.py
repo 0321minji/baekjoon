@@ -14,7 +14,6 @@ def solution(players, m, k):
         #이용자 수 비교 후 증설 여부 결정
         now = sum(server)
         if (now+1)*m<=players[i]:
-            print('here')
             # 몇 개 추가?
             temp=players[i]//m-now
             server.append(temp)
