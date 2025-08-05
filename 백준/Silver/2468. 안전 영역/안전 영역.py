@@ -1,41 +1,33 @@
-import sys, copy
-input = sys.stdin.readline
+import sys
+from collections import deque
+input=sys.stdin.readline
+n=int(input())
+graph=[list(map(int,input().split())) for _ in range(n)]
+MAX=max(map(max,graph))
 
-move=[[0,1],[0,-1],[1,0],[-1,0]]
-
-def bfs(h,i,j,graph):
-    que=[(i,j)]
+cnt=0
+move=[(0,1),(0,-1),(1,0),(-1,0)]
+def bfs(a,b,visited):
+    que=deque([(a,b)])
+    
     while que:
-        x,y=que.pop()
+        x,y=que.popleft()
         for dx,dy in move:
             nx=x+dx; ny=y+dy
-            if 0<=nx<n and 0<=ny<n and graph[nx][ny]>h:
+            if (0<=nx<n and 0<=ny<n) and not visited[nx][ny] and graph[nx][ny]>h:
                 que.append((nx,ny))
-                graph[nx][ny]=0
-                
-            
-def solve(h,graph):
-    result=0
-    for i in range(n):
-        for j in range(n):
-            if graph[i][j]>h:
-                result+=1
-                graph[i][j]=0
-                bfs(h,i,j,graph)
-
-                
-    return result
+                visited[nx][ny]=1
     
+for h in range(MAX):
+    temp=0
+    visited=[[0 for _ in range(n)] for _ in range(n)]
 
-n=int(input())
-rain=[list(map(int,input().split())) for _ in range(n)]
-
-high=max(map(max,rain))
-result=0
-
-for h in range(high):
-    #result=max(result,solve(h,rain))
-    temp=copy.deepcopy(rain)
-    result=max(result,solve(h,temp))
-    
-print(result)
+    for a in range(n):
+        for b in range(n):
+            if graph[a][b]>h and not visited[a][b]:
+                visited[a][b]=1
+                bfs(a,b,visited)
+                temp+=1
+    cnt=max(temp,cnt)
+print(cnt)    
+                
