@@ -1,15 +1,11 @@
-# select *
-# from fish_info info join fish_name_info name
-# on info.fish_type = name.fish_type
-# group by fish_name
-# having max(length)
-## window 함수..?
+-- 코드를 작성해주세요
 
-## 종류별 대어
-select id, fish_name, length 
-from fish_info info join fish_name_info name on info.fish_type = name.fish_type
-where (info.fish_type, length)
-in (select fish_type, max(length) as length
-    from fish_info 
-    group by fish_type)
-order by id
+select id, fish_name,length
+from (
+    select id,fish_type,length, row_number() over (partition by fish_type order by length desc) as rn
+    from fish_info
+) as t
+join fish_name_info as name
+on t.fish_type=name.fish_type
+where t.rn=1
+order by id;
