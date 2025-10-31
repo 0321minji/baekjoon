@@ -1,23 +1,20 @@
+from collections import defaultdict
+
 def solution(genres, plays):
     answer = []
+    genre=defaultdict(int)
+    music=defaultdict(list)
+    for g,p in zip(enumerate(genres),plays):
+        genre[g[1]]+=p
+        music[g[1]].append([g[0],p])
     
-    dic1={}
-    dic2={}
-    
-    for i,(g,p) in enumerate(zip(genres,plays)):
-        if g not in dic1:
-            dic1[g]=[(i,p)]
-        else:
-            dic1[g].append((i,p))
-        if g not in dic2:
-            dic2[g]=p
-        else:
-            dic2[g]+=p
-    
-    dic2=sorted(dic2.items(),key=lambda x:x[1], reverse=True)
+    # for key, items in lis
+    for key, value in sorted(list(genre.items()), key=lambda x:-x[1]):
+        cnt=0
+        for index, _ in sorted(music[key],key=lambda x:-x[1]):
+            if cnt==2:
+                break
+            answer.append(index)
+            cnt+=1
 
-    for k,v in dic2:
-        temp=sorted(dic1[k], key=lambda x:x[1], reverse=True)[:2]
-        for i,p in temp:
-            answer.append(i)
     return answer
