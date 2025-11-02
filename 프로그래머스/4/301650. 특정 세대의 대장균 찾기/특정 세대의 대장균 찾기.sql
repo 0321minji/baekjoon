@@ -1,11 +1,10 @@
 -- 코드를 작성해주세요
-select child.id as ID
-from ecoli_data child join 
-(select child.id as gen2 , parent.id as gen1 
-from ecoli_data child join (select * from ecoli_data) parent
-on child.parent_id = parent.id
-where parent.parent_id is NULL) past
-on child.parent_id = past.gen2
-order by child.id
-
-# 자기참조를.. 3번을 해서 null 이 아닌걸 찾아야하묘....?
+SELECT GEN3.ID
+FROM ECOLI_DATA GEN3
+JOIN (
+SELECT GEN2.ID
+FROM (SELECT DISTINCT(ID) FROM ECOLI_DATA WHERE PARENT_ID IS NULL) GEN1
+JOIN ECOLI_DATA GEN2
+ON GEN1.ID = GEN2.PARENT_ID
+) GEN2 ON GEN3.PARENT_ID = GEN2.ID
+ORDER BY ID
