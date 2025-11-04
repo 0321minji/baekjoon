@@ -1,9 +1,8 @@
 -- 코드를 작성해주세요
-
-select item_id, item_name, rarity
-from item_info info
-where item_id not in (select distinct parent_item_id from item_tree
-                      where parent_item_id is not null)
-order by item_id desc
-# 업그레이드 불가한 아이템 출력
-# parent.parent_item_id 가 없어야됨
+# 리프 찾는 거
+select parent.item_id, parent.item_name, rarity
+from item_info parent
+left join item_tree child
+on parent.item_id=child.parent_item_id
+where ISNULL(child.item_id)
+order by parent.item_id desc
